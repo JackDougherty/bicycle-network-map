@@ -1,10 +1,17 @@
 // set up the map center and zoom level
 var map = L.map('map', {
-  center: [41.762, -72.742], // [41.5, -72.7] for Connecticut; [41.76, -72.67] for Hartford county or city
-  zoom: 13, // zoom 9 for Connecticut; 10 for Hartford county, 12 for Hartford city
+  center: [41.762, -72.742],
+  zoom: 13,
   zoomControl: false, // add later to reposition
   scrollWheelZoom: false
 });
+
+// set bounds for geocoder
+var minLatLng = [41.71455, -72.7933];
+var maxLatLng = [41.8194, -72.626];
+var bounds = L.latLngBounds(minLatLng, maxLatLng);
+
+var bikeNetworkLayer;
 
 // optional : customize link to view source code; add your own GitHub repository
 map.attributionControl
@@ -33,6 +40,11 @@ var lightAll = new L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/
 }).addTo(map); // adds layer by default
 controlLayers.addBaseLayer(lightAll, 'CartoDB LightAll');
 
+var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+});
+controlLayers.addBaseLayer(Esri_WorldStreetMap, 'Esri World Street Map');
+
 // Esri satellite map from http://leaflet-extras.github.io/leaflet-providers/preview/
 // OR use esri-leaflet plugin and esri basemap name https://esri.github.io/esri-leaflet/examples/switching-basemaps.html
 var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -40,18 +52,30 @@ var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest
 });
 controlLayers.addBaseLayer(Esri_WorldImagery, 'Esri World Imagery');
 
-// load GeoJSON polyline data
+// create style function
+var bikeNetworkStyle = function(f) {
+  var type2color = {
+    'path': 'green',
+    'lane': '#3399ff', // light blue
+    'mixed': 'orange',
+    'shared': 'red',
+  }
+
+  return {
+    'color': 'type2color[ f.properties.type ] || 'black', // black if no data,
+    'weight': 2
+  }
+}
+
+
+// load GeoJSON polyline data and display styles
 $.getJSON("bicycle-network-draft.geojson", function (data){
-  var geoJsonLayer = L.geoJson(data, {
-    style: function (feature) {
-      return {
-        'color': 'green',
-        'weight': 2,
-      }
-    },
+  bikeNetworkLayer = L.geoJson(data, {
+    style: bikeNetworkStyle,
     onEachFeature: function( feature, layer) {
       layer.bindPopup(feature.properties.type) // change to match your geojson property labels
     }
   }).addTo(map);  // insert ".addTo(map)" to display layer by default
   controlLayers.addOverlay(geoJsonLayer, 'All Bike Network');  // insert your 'Title' to add to legend
+  map.fitBounds(bikeNetworkLayer.getBounds())
 });
