@@ -52,18 +52,31 @@ var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest
 });
 controlLayers.addBaseLayer(Esri_WorldImagery, 'Esri World Imagery');
 
-// create style function
+// create styles  https://www.w3schools.com/colors/colors_names.asp
 var bikeNetworkStyle = function(f) {
   var type2color = {
-    'path': 'green',
-    'lane': '#3399ff', // light blue
-    'mixed': 'orange',
-    'shared': 'red',
+    'path': 'darkgreen',
+    'lane': 'green',
+    'mixed': 'green',
+    'shared': 'green'
+  },
+  type2weight = {
+    'path': 4,
+    'lane': 3,
+    'mixed': 3,
+    'shared': 2
+  },
+  type2dash = {
+    'path': 0,
+    'lane': 0,
+    'mixed': 5,
+    'shared': 3
   }
 
   return {
-    'color': type2color[ f.properties.type ] || 'black', // black if no data,
-    'weight': 2
+    'color': type2color[ f.properties.type ] || 'gray', // gray if no data
+    'weight': type2weight[ f.properties.type ] || '1', // 1 if no data
+    'dashArray':type2dash[ f.properties.type ] || '0', // 0 if no data
   }
 }
 
