@@ -76,6 +76,6 @@ $.getJSON("bicycle-network-draft.geojson", function (data){
       layer.bindPopup(feature.properties.type) // change to match your geojson property labels
     }
   }).addTo(map);  // insert ".addTo(map)" to display layer by default
-  controlLayers.addOverlay(geoJsonLayer, 'All Bike Network');  // insert your 'Title' to add to legend
+  controlLayers.addOverlay(bikeNetworkLayer, 'All Bike Network');  // insert your 'Title' to add to legend
   map.fitBounds(bikeNetworkLayer.getBounds())
 });
