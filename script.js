@@ -83,7 +83,7 @@ var bikeNetworkStyle = function(f) {
 
 
 // load GeoJSON polyline data and display styles
-$.getJSON("wh-bicycle-network-inprogress.geojson", function (data){
+$.getJSON("wh-bicycle-network-partial.geojson", function (data){
   bikeNetworkLayer = L.geoJson(data, {
     style: bikeNetworkStyle,
     onEachFeature: function( feature, layer) {
