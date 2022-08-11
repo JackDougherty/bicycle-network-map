@@ -1,6 +1,8 @@
 # wh-bicycle-network-map
 West Hartford Bicycle Network Map, revised for BikeWestHartford.org
 
+## live map
+https://jackdougherty.github.io/wh-bicycle-network-map
 
 ## data sources
 - Bicycle Network Map by Department of Community Development, Town of West Hartford, map PDF last updated 25 May 2019, https://resources.finalsite.net/images/v1650896925/westhartfordctgov/lnsf6colmpygurg2j6xa/WHBicycleRoutes.pdf
