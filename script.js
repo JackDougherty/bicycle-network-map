@@ -15,7 +15,7 @@ var bikeNetworkLayer;
 
 // optional : customize link to view source code; add your own GitHub repository
 map.attributionControl
-.setPrefix('View <a href="http://github.com/jackdougherty/wh-bicycle-network-map">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+.setPrefix('View <a href="http://github.com/jackdougherty/bicycle-network-map">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
 L.control.scale().addTo(map);
 
@@ -66,6 +66,7 @@ var bikeNetworkStyle = function(f) {
     'mixed': 3,
     'shared': 2
   },
+  // https://leafletjs.com/reference.html#polyline
   type2dash = {
     'path': 0,
     'lane': 0,
@@ -82,13 +83,13 @@ var bikeNetworkStyle = function(f) {
 
 
 // load GeoJSON polyline data and display styles
-$.getJSON("bicycle-network-draft.geojson", function (data){
+$.getJSON("wh-bicycle-network-inprogress.geojson", function (data){
   bikeNetworkLayer = L.geoJson(data, {
     style: bikeNetworkStyle,
     onEachFeature: function( feature, layer) {
       layer.bindPopup(feature.properties.type) // change to match your geojson property labels
     }
   }).addTo(map);  // insert ".addTo(map)" to display layer by default
-  controlLayers.addOverlay(bikeNetworkLayer, 'All Bike Network');  // insert your 'Title' to add to legend
+  controlLayers.addOverlay(bikeNetworkLayer, 'PARTIAL Bike Network');  // insert your 'Title' to add to legend
   map.fitBounds(bikeNetworkLayer.getBounds())
 });

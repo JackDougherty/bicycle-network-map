@@ -1,8 +1,13 @@
-# wh-bicycle-network-map
-West Hartford Bicycle Network Map, revised for BikeWestHartford.org
+# bicycle-network-map
+Bicycle Network Map IN-PROGRESS, revised for BikeWestHartford.org
 
 ## live map
-https://jackdougherty.github.io/wh-bicycle-network-map
+https://jackdougherty.github.io/bicycle-network-map
+
+## TODO
+- review WH north side and Farmington Ave
+- add Trout Brook Trail, MDC Trails, similar from GIS files
+- add Hartford bike lanes to show gaps
 
 ## data sources
 - Bicycle Network Map by Department of Community Development, Town of West Hartford, map PDF last updated 25 May 2019, https://resources.finalsite.net/images/v1650896925/westhartfordctgov/lnsf6colmpygurg2j6xa/WHBicycleRoutes.pdf
