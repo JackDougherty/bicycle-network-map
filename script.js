@@ -62,7 +62,7 @@ var bikeNetworkStyle = function(f) {
   }
 
   return {
-    'color': 'type2color[ f.properties.type ] || 'black', // black if no data,
+    'color': type2color[ f.properties.type ] || 'black', // black if no data,
     'weight': 2
   }
 }
