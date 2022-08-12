@@ -10,15 +10,14 @@ https://jackdougherty.github.io/bicycle-network-map
 - add Hartford bike lanes to show gaps across municipal borders
 - finalize legend:
 
-Existing Bicycle Infrastructure (as of DATE)
+### Bicycle Infrastructure (as of DATE)
+- path - Protected Paths - dark green line
+- lane - Dedicated Bike Lane - medium green line
+- shared - Shared with cars (Sharrows) - dotted light line
+- mixed  - Mixed Lane and Sharrow  - dash med green
+- proposed - Proposed (Trout Brook Trail only) - gray
+- unpaved - Unpaved or Dirt Trails - gray (or light brown later?)
 
-path - Protected Paths  - dark green line
-
-lane - Dedicated Bike Lane - medium green line
-
-mixed  - Lane one side, Sharrow other side - dash med green
-
-shared - Shared with cars (Sharrows) - dotted light line
 
 ## data sources
 - Bicycle Network Map by Department of Community Development, Town of West Hartford, map PDF last updated 25 May 2019, https://resources.finalsite.net/images/v1650896925/westhartfordctgov/lnsf6colmpygurg2j6xa/WHBicycleRoutes.pdf
