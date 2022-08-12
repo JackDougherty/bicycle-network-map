@@ -45,13 +45,6 @@ var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/re
 });
 controlLayers.addBaseLayer(Esri_WorldStreetMap, 'Esri World Street Map');
 
-// Esri satellite map from http://leaflet-extras.github.io/leaflet-providers/preview/
-// OR use esri-leaflet plugin and esri basemap name https://esri.github.io/esri-leaflet/examples/switching-basemaps.html
-var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-});
-controlLayers.addBaseLayer(Esri_WorldImagery, 'Esri World Imagery');
-
 // create styles  https://www.w3schools.com/colors/colors_names.asp
 var bikeNetworkStyle = function(f) {
   var type2color = {
@@ -80,7 +73,6 @@ var bikeNetworkStyle = function(f) {
     'dashArray':type2dash[ f.properties.type ] || '0', // 0 if no data
   }
 }
-
 
 // load GeoJSON polyline data and display styles
 $.getJSON("wh-bicycle-network-partial.geojson", function (data){
