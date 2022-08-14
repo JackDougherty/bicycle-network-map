@@ -1,17 +1,17 @@
 // set up the map center and zoom level
 var map = L.map('map', {
-  center: [41.762, -72.742],
+  center: [41.765, -72.715],
   zoom: 13,
   zoomControl: false, // add later to reposition
   scrollWheelZoom: false
 });
 
 // set bounds for geocoder
-var minLatLng = [41.71455, -72.7933];
-var maxLatLng = [41.8194, -72.626];
-var bounds = L.latLngBounds(minLatLng, maxLatLng);
-
-var bikeNetworkLayer;
+// var minLatLng = [41.71455, -72.7933];
+// var maxLatLng = [41.8194, -72.626];
+// var bounds = L.latLngBounds(minLatLng, maxLatLng);
+//
+// var bikeNetworkLayer;
 
 // optional : customize link to view source code; add your own GitHub repository
 map.attributionControl
@@ -22,51 +22,49 @@ L.control.scale().addTo(map);
 // Reposition zoom control other than default topleft
 L.control.zoom({position: "topright"}).addTo(map);
 
-// optional: add legend to toggle any baselayers and/or overlays
+// add legend to toggle any baselayers and/or overlays
 // global variable with (null, null) allows indiv layers to be added inside functions below
 var controlLayers = L.control.layers( null, null, {
-  position: "bottomright", // suggested: bottomright for CT (in Long Island Sound); topleft for Hartford region
+  position: "bottomright",
   collapsed: false // false = open by default
 }).addTo(map);
 
-/* BASELAYERS */
-// use common baselayers below, delete, or add more with plain JavaScript from http://leaflet-extras.github.io/leaflet-providers/preview/
-// .addTo(map); -- suffix displays baselayer by default
-// controlLayers.addBaseLayer (variableName, 'label'); -- adds baselayer and label to legend; omit if only one baselayer with no toggle desired
-var lightAll = new L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+// Baselayers https://leaflet-extras.github.io/leaflet-providers/preview/
+
+
+var CartoDB_LightAll = new L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   subdomains: 'abcd',
   maxZoom: 19
-}).addTo(map); // adds layer by default
-controlLayers.addBaseLayer(lightAll, 'CartoDB LightAll');
+}).addTo(map); // add layer by default
+controlLayers.addBaseLayer(CartoDB_LightAll, 'Street Map light');
 
 var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
 });
-controlLayers.addBaseLayer(Esri_WorldStreetMap, 'Esri World Street Map');
+controlLayers.addBaseLayer(Esri_WorldStreetMap, 'Street Map colored');
 
-// create styles  https://www.w3schools.com/colors/colors_names.asp
+// Style lines by color name https://www.w3schools.com/colors/colors_names.asp
+// by weight and dashArray https://leafletjs.com/reference.html#polyline
 var bikeNetworkStyle = function(f) {
   var type2color = {
     'path': 'darkgreen',
     'lane': 'green',
-    'mixed': 'green',
-    'shared': 'green'
+    'shared': 'green',
+    'mixed': 'green'
   },
   type2weight = {
     'path': 4,
     'lane': 3,
-    'mixed': 3,
-    'shared': 2
+    'shared': 2,
+    'mixed': 3
   },
-  // https://leafletjs.com/reference.html#polyline
   type2dash = {
     'path': 0,
     'lane': 0,
-    'mixed': 5,
-    'shared': 3
+    'shared': 3,
+    'mixed': 5
   }
-
   return {
     'color': type2color[ f.properties.type ] || 'gray', // gray if no data
     'weight': type2weight[ f.properties.type ] || '1', // 1 if no data
@@ -74,14 +72,55 @@ var bikeNetworkStyle = function(f) {
   }
 }
 
-// load GeoJSON polyline data and display styles
+// load GeoJSON and create each layer using filter by type, matching GeoJSON properties
 $.getJSON("bicycle-network-partial.geojson", function (data){
-  bikeNetworkLayer = L.geoJson(data, {
+
+  bikeNetworkLayerPath = L.geoJson(data, {
     style: bikeNetworkStyle,
+    filter: function( feature, layer) {
+      return feature.properties.type === 'path' ;
+    },
     onEachFeature: function( feature, layer) {
-      layer.bindPopup(feature.properties.type) // change to match your geojson property labels
+      layer.bindPopup(feature.properties.name)
     }
-  }).addTo(map);  // insert ".addTo(map)" to display layer by default
-  controlLayers.addOverlay(bikeNetworkLayer, 'PARTIAL Bike Network');  // insert your 'Title' to add to legend
-  map.fitBounds(bikeNetworkLayer.getBounds())
+  }).addTo(map);
+
+  controlLayers.addOverlay(bikeNetworkLayerPath, 'Bike Paths');
+
+  bikeNetworkLayerLane = L.geoJson(data, {
+    style: bikeNetworkStyle,
+    filter: function( feature, layer) {
+      return feature.properties.type === 'lane' ;
+    },
+    onEachFeature: function( feature, layer) {
+      layer.bindPopup(feature.properties.name)
+    }
+  }).addTo(map);
+
+  controlLayers.addOverlay(bikeNetworkLayerLane, 'Bike Lanes');
+
+  bikeNetworkLayerShared = L.geoJson(data, {
+    style: bikeNetworkStyle,
+    filter: function( feature, layer) {
+      return feature.properties.type === 'shared' ;
+    },
+    onEachFeature: function( feature, layer) {
+      layer.bindPopup(feature.properties.name)
+    }
+  }).addTo(map);
+
+  controlLayers.addOverlay(bikeNetworkLayerShared, 'Sharrow markers');
+
+  bikeNetworkLayerMixed = L.geoJson(data, {
+    style: bikeNetworkStyle,
+    filter: function( feature, layer) {
+      return feature.properties.type === 'mixed' ;
+    },
+    onEachFeature: function( feature, layer) {
+      layer.bindPopup(feature.properties.name)
+    }
+  }).addTo(map);
+
+  controlLayers.addOverlay(bikeNetworkLayerMixed, 'Mixed: Lane + Sharrow');
+
 });

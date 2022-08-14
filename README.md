@@ -5,23 +5,27 @@ Bicycle Network Map IN-PROGRESS, revised for BikeWestHartford.org
 https://jackdougherty.github.io/bicycle-network-map
 
 ## TODO
-- add toggle for town boundaries
-- WH ground review WH north side and Farmington Ave
+- Finalize Legend
+  - decide whether to distinguish between Multi-Use Trail (wide) versus Path (narrow)
+  - decide if or how to display other types (unpaved, proposed)
+  - show line colors/weights/dashArray in legend, similar to https://jackdougherty.github.io/bikemapcode/newbritain.html
+
+### Designated Infrastructure (as of DATE)
+  - path - Protected Paths - dark green line
+  - lane - Dedicated Bike Lane - medium green line
+  - shared - Shared with cars (Sharrows) - dotted light line
+  - mixed  - Mixed (Lane one side, Sharrow other) - dash med green
+  - proposed - Proposed (Trout Brook Trail only) - gray
+  - unpaved - Unpaved or Dirt Trails - gray (or light brown later?)
+
+- add toggle for town boundaries, off by default
 - add to and from WH
+- convert Hartford names to proper capitalization
+- ground review WH north side and Farmington Ave
 - ground review Hartford
 - ground review MDC WH
 - decide if best label is "manager" or "town" or use both
 - add DEEP Bicycling Trails? https://data.ct.gov/dataset/Bicycling-Permitted/my8k-w4e6
-- decide whether to distinguish between Multi-Use Trail (wide) versus Path (narrow)
-- finalize legend and code in final types (proposed, unpaved, etc.)
-
-### Bicycle Infrastructure (as of DATE)
-- path - Protected Paths - dark green line
-- lane - Dedicated Bike Lane - medium green line
-- shared - Shared with cars (Sharrows) - dotted light line
-- mixed  - Mixed Lane and Sharrow  - dash med green
-- proposed - Proposed (Trout Brook Trail only) - gray
-- unpaved - Unpaved or Dirt Trails - gray (or light brown later?)
 
 ## data
 - Public download https://app.placemark.io/public/wCRAP2DACjNUsCdeS9AeP
