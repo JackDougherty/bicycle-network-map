@@ -19,6 +19,8 @@ https://jackdougherty.github.io/bicycle-network-map
   - unpaved - Unpaved or Dirt Trails - gray (or light brown later?)
 
 - add toggle for town boundaries, off by default
+- add "GAP" in red for "Gaps" and credit Tony
+- update crash map data, run both West Hartford and Hartford, and display heatmap layer
 - add to and from WH
 - convert Hartford names to proper capitalization
 - ground review WH north side and Farmington Ave

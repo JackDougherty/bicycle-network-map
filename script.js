@@ -124,3 +124,15 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
   controlLayers.addOverlay(bikeNetworkLayerMixed, 'Mixed: Lane + Sharrow');
 
 });
+
+// add custom legend INSERT REMINDER LINK to graphic design file used below
+
+// var legend = L.control({position: 'bottomright'});
+//
+// legend.onAdd = function(map) {
+//   var div = L.DomUtil.create('div', 'info legend');
+//   div.innerHTML += '<img src="./1924-zoning-legend.png" alt="1924 Zoning Legend" width="110">';
+//   return div;
+// };
+//
+// legend.addTo(map);
