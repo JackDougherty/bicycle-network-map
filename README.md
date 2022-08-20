@@ -23,10 +23,9 @@ https://jackdougherty.github.io/bicycle-network-map
 - update crash map data, run both West Hartford and Hartford, and display heatmap layer
 - add to and from WH
 - convert Hartford names to proper capitalization
-- ground review WH north side and Farmington Ave
 - ground review Hartford
-- ground review MDC WH
 - decide if best label is "manager" or "town" or use both
+- add Newington, New Britain, East Hartford, and more?
 - add DEEP Bicycling Trails? https://data.ct.gov/dataset/Bicycling-Permitted/my8k-w4e6
 
 ## data
