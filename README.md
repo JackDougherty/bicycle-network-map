@@ -1,8 +1,8 @@
 # bicycle-network-map
-Bicycle Network Map IN-PROGRESS, revised for BikeWestHartford.org
+Bicycle Network Map DRAFT for https://BikeWestHartford.org
 
 ## live map
-https://jackdougherty.github.io/bicycle-network-map
+https://bikewesthartford.github.io/bicycle-network-map
 
 ## TODO
 - Finalize Legend
