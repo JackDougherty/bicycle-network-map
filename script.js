@@ -50,20 +50,20 @@ var bikeNetworkStyle = function(f) {
   var type2color = {
     'path': 'darkgreen',
     'lane': 'green',
-    'shared': 'green',
-    'mixed': 'green'
+    'mixed': 'green',
+    'shared': 'green'
   },
   type2weight = {
     'path': 4,
     'lane': 3,
-    'shared': 2,
-    'mixed': 3
+    'mixed': 3,
+    'shared': 2
   },
   type2dash = {
     'path': 0,
     'lane': 0,
-    'shared': 3,
-    'mixed': 5
+    'mixed': 5,
+    'shared': 3
   }
   return {
     'color': type2color[ f.properties.type ] || 'gray', // gray if no data
@@ -71,6 +71,23 @@ var bikeNetworkStyle = function(f) {
     'dashArray':type2dash[ f.properties.type ] || '0', // 0 if no data
   }
 }
+
+$.getJSON("towns.geojson", function (data){
+  var geoJsonLayer = L.geoJson(data, {
+    style: function (feature) {
+      return {
+        'color': 'red',
+        'weight': 3,
+        'fillColor': '#fff',
+        'fillOpacity': 0
+      }
+    },
+    // onEachFeature: function( feature, layer) {
+    //   layer.bindPopup(feature.properties.name) // change to match your geojson property labels
+    // }
+  });
+  controlLayers.addOverlay(geoJsonLayer, 'Towns');
+});
 
 // load GeoJSON and create each layer using filter by type, matching GeoJSON properties
 $.getJSON("bicycle-network-partial.geojson", function (data){
@@ -85,7 +102,7 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
     }
   }).addTo(map);
 
-  controlLayers.addOverlay(bikeNetworkLayerPath, 'Protected Path');
+  controlLayers.addOverlay(bikeNetworkLayerPath, '<i class="path"></i> Protected Path');
 
   bikeNetworkLayerLane = L.geoJson(data, {
     style: bikeNetworkStyle,
@@ -97,7 +114,7 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
     }
   }).addTo(map);
 
-  controlLayers.addOverlay(bikeNetworkLayerLane, 'Painted Lane');
+  controlLayers.addOverlay(bikeNetworkLayerLane, '<i class="lane"></i> Painted Lane');
 
   bikeNetworkLayerMixed = L.geoJson(data, {
     style: bikeNetworkStyle,
@@ -122,8 +139,6 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
   }).addTo(map);
 
   controlLayers.addOverlay(bikeNetworkLayerShared, 'Sharrow marker');
-
-
 
 });
 

@@ -18,6 +18,11 @@ https://bikewesthartford.github.io/bicycle-network-map
   - proposed - Proposed (Trout Brook Trail only) - gray
   - unpaved - Unpaved or Dirt Trails - gray (or light brown later?)
 
+- update West Hartford
+  - Lasalle bike lane
+  - Park Street from Quaker to Trout Brook
+  - Webster Hill Blvd extension
+- add panes(?) to separate layers interactivity by levels
 - add toggle for town boundaries, off by default
 - add "GAP" in red for "Gaps" and credit Tony
 - update crash map data, run both West Hartford and Hartford, and display heatmap layer
