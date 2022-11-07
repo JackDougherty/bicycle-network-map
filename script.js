@@ -15,7 +15,7 @@ var map = L.map('map', {
 
 // optional : customize link to view source code; add your own GitHub repository
 map.attributionControl
-.setPrefix('View <a href="http://github.com/jackdougherty/bicycle-network-map">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+.setPrefix('View <a href="http://github.com/bikewesthartford/bicycle-network-map">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
 L.control.scale().addTo(map);
 
@@ -85,7 +85,7 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
     }
   }).addTo(map);
 
-  controlLayers.addOverlay(bikeNetworkLayerPath, 'Bike Paths');
+  controlLayers.addOverlay(bikeNetworkLayerPath, 'Protected Path');
 
   bikeNetworkLayerLane = L.geoJson(data, {
     style: bikeNetworkStyle,
@@ -97,19 +97,7 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
     }
   }).addTo(map);
 
-  controlLayers.addOverlay(bikeNetworkLayerLane, 'Bike Lanes');
-
-  bikeNetworkLayerShared = L.geoJson(data, {
-    style: bikeNetworkStyle,
-    filter: function( feature, layer) {
-      return feature.properties.type === 'shared' ;
-    },
-    onEachFeature: function( feature, layer) {
-      layer.bindPopup(feature.properties.name)
-    }
-  }).addTo(map);
-
-  controlLayers.addOverlay(bikeNetworkLayerShared, 'Sharrow markers');
+  controlLayers.addOverlay(bikeNetworkLayerLane, 'Painted Lane');
 
   bikeNetworkLayerMixed = L.geoJson(data, {
     style: bikeNetworkStyle,
@@ -121,7 +109,21 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
     }
   }).addTo(map);
 
-  controlLayers.addOverlay(bikeNetworkLayerMixed, 'Mixed: Lane + Sharrow');
+  controlLayers.addOverlay(bikeNetworkLayerMixed, 'Mixed Lane + Sharrow');
+
+  bikeNetworkLayerShared = L.geoJson(data, {
+    style: bikeNetworkStyle,
+    filter: function( feature, layer) {
+      return feature.properties.type === 'shared' ;
+    },
+    onEachFeature: function( feature, layer) {
+      layer.bindPopup(feature.properties.name)
+    }
+  }).addTo(map);
+
+  controlLayers.addOverlay(bikeNetworkLayerShared, 'Sharrow marker');
+
+
 
 });
 
