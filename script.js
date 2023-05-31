@@ -25,7 +25,7 @@ L.control.zoom({position: "topright"}).addTo(map);
 // add legend to toggle any baselayers and/or overlays
 // global variable with (null, null) allows indiv layers to be added inside functions below
 var controlLayers = L.control.layers( null, null, {
-  position: "bottomright",
+  position: "bottomleft",
   collapsed: false // false = open by default
 }).addTo(map);
 
@@ -50,19 +50,28 @@ var bikeNetworkStyle = function(f) {
   var type2color = {
     'path': 'darkgreen',
     'lane': 'green',
-    'mixed': 'green'
+    'mixed': 'green',
+    'blue': 'blue',
+    'orange': 'orange',
+    'green': 'green'
     // 'shared': 'green'
   },
   type2weight = {
     'path': 4,
     'lane': 2,
-    'mixed': 2
+    'mixed': 2,
+    'blue': 2,
+    'orange': 2,
+    'green': 2
     // 'shared': 2
   },
   type2dash = {
     'path': 0,
     'lane': 0,
-    'mixed': 5
+    'mixed': 5,
+    'blue': 3,
+    'orange': 3,
+    'green': 3
     // 'shared': 3
   }
   return {
@@ -71,23 +80,6 @@ var bikeNetworkStyle = function(f) {
     'dashArray':type2dash[ f.properties.type ] || '0', // 0 if no data
   }
 }
-
-$.getJSON("towns.geojson", function (data){
-  var geoJsonLayer = L.geoJson(data, {
-    style: function (feature) {
-      return {
-        'color': 'red',
-        'weight': 3,
-        'fillColor': '#fff',
-        'fillOpacity': 0
-      }
-    },
-    // onEachFeature: function( feature, layer) {
-    //   layer.bindPopup(feature.properties.name) // change to match your geojson property labels
-    // }
-  });
-  controlLayers.addOverlay(geoJsonLayer, 'Towns');
-});
 
 // load GeoJSON and create each layer using filter by type, matching GeoJSON properties
 $.getJSON("bicycle-network-partial.geojson", function (data){
@@ -128,17 +120,58 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
 
   controlLayers.addOverlay(bikeNetworkLayerMixed, '<i class="mixed"></i> Mixed Lane + Sharrow');
 
-  // bikeNetworkLayerShared = L.geoJson(data, {
-  //   style: bikeNetworkStyle,
-  //   filter: function( feature, layer) {
-  //     return feature.properties.type === 'shared' ;
-  //   },
-  //   onEachFeature: function( feature, layer) {
-  //     layer.bindPopup(feature.properties.name)
-  //   }
-  // }).addTo(map);
-  //
-  // controlLayers.addOverlay(bikeNetworkLayerShared, 'Sharrow marker');
+  bikeNetworkLayerBlue = L.geoJson(data, {
+    style: bikeNetworkStyle,
+    filter: function( feature, layer) {
+      return feature.properties.type === 'blue' ;
+    },
+    onEachFeature: function( feature, layer) {
+      layer.bindPopup(feature.properties.name)
+    }
+  }).addTo(map);
+
+  controlLayers.addOverlay(bikeNetworkLayerBlue, 'Blue loop');
+
+  bikeNetworkLayerOrange = L.geoJson(data, {
+    style: bikeNetworkStyle,
+    filter: function( feature, layer) {
+      return feature.properties.type === 'orange' ;
+    },
+    onEachFeature: function( feature, layer) {
+      layer.bindPopup(feature.properties.name)
+    }
+  }).addTo(map);
+
+  controlLayers.addOverlay(bikeNetworkLayerOrange, 'Orange loop');
+
+  bikeNetworkLayerGreen = L.geoJson(data, {
+    style: bikeNetworkStyle,
+    filter: function( feature, layer) {
+      return feature.properties.type === 'green' ;
+    },
+    onEachFeature: function( feature, layer) {
+      layer.bindPopup(feature.properties.name)
+    }
+  }).addTo(map);
+
+  controlLayers.addOverlay(bikeNetworkLayerGreen, 'Green loop');
+
+  $.getJSON("towns.geojson", function (data){
+    var geoJsonLayer = L.geoJson(data, {
+      style: function (feature) {
+        return {
+          'color': 'red',
+          'weight': 3,
+          'fillColor': '#fff',
+          'fillOpacity': 0
+        }
+      },
+      // onEachFeature: function( feature, layer) {
+      //   layer.bindPopup(feature.properties.name) // change to match your geojson property labels
+      // }
+    });
+    controlLayers.addOverlay(geoJsonLayer, 'Towns');
+  });
 
 });
 
