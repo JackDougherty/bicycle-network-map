@@ -50,20 +50,20 @@ var bikeNetworkStyle = function(f) {
   var type2color = {
     'path': 'darkgreen',
     'lane': 'green',
-    'mixed': 'green',
-    'shared': 'green'
+    'mixed': 'green'
+    // 'shared': 'green'
   },
   type2weight = {
     'path': 4,
-    'lane': 3,
-    'mixed': 3,
-    'shared': 2
+    'lane': 2,
+    'mixed': 2
+    // 'shared': 2
   },
   type2dash = {
     'path': 0,
     'lane': 0,
-    'mixed': 5,
-    'shared': 3
+    'mixed': 5
+    // 'shared': 3
   }
   return {
     'color': type2color[ f.properties.type ] || 'gray', // gray if no data
@@ -126,19 +126,19 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
     }
   }).addTo(map);
 
-  controlLayers.addOverlay(bikeNetworkLayerMixed, 'Mixed Lane + Sharrow');
+  controlLayers.addOverlay(bikeNetworkLayerMixed, '<i class="mixed"></i> Mixed Lane + Sharrow');
 
-  bikeNetworkLayerShared = L.geoJson(data, {
-    style: bikeNetworkStyle,
-    filter: function( feature, layer) {
-      return feature.properties.type === 'shared' ;
-    },
-    onEachFeature: function( feature, layer) {
-      layer.bindPopup(feature.properties.name)
-    }
-  }).addTo(map);
-
-  controlLayers.addOverlay(bikeNetworkLayerShared, 'Sharrow marker');
+  // bikeNetworkLayerShared = L.geoJson(data, {
+  //   style: bikeNetworkStyle,
+  //   filter: function( feature, layer) {
+  //     return feature.properties.type === 'shared' ;
+  //   },
+  //   onEachFeature: function( feature, layer) {
+  //     layer.bindPopup(feature.properties.name)
+  //   }
+  // }).addTo(map);
+  //
+  // controlLayers.addOverlay(bikeNetworkLayerShared, 'Sharrow marker');
 
 });
 

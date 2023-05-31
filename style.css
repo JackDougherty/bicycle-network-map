@@ -19,6 +19,13 @@ body { margin:0; padding:0; }
   background: green;
   display: inline-block;
   vertical-align: middle;
-  height: 3px;
+  height: 2px;
+  width: 25px;
+}
+.mixed {
+  background: green;
+  display: inline-block;
+  vertical-align: middle;
+  height: 2px;
   width: 25px;
 }
