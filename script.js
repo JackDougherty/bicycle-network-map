@@ -6,13 +6,6 @@ var map = L.map('map', {
   scrollWheelZoom: false
 });
 
-// set bounds for geocoder
-// var minLatLng = [41.71455, -72.7933];
-// var maxLatLng = [41.8194, -72.626];
-// var bounds = L.latLngBounds(minLatLng, maxLatLng);
-//
-// var bikeNetworkLayer;
-
 // create custom pane for town layer, set to display below overlay zIndex 400
 map.createPane('towns');
 map.getPane('towns').style.zIndex = 350;
@@ -34,8 +27,6 @@ var controlLayers = L.control.layers( null, null, {
 }).addTo(map);
 
 // Baselayers https://leaflet-extras.github.io/leaflet-providers/preview/
-
-
 var CartoDB_LightAll = new L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   subdomains: 'abcd',
@@ -180,15 +171,3 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
   });
 
 });
-
-// add custom legend INSERT REMINDER LINK to graphic design file used below
-
-// var legend = L.control({position: 'bottomright'});
-//
-// legend.onAdd = function(map) {
-//   var div = L.DomUtil.create('div', 'info legend');
-//   div.innerHTML += '<img src="./1924-zoning-legend.png" alt="1924 Zoning Legend" width="110">';
-//   return div;
-// };
-//
-// legend.addTo(map);
