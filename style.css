@@ -12,7 +12,7 @@ body { margin:0; padding:0; }
   background: darkgreen;
   display: inline-block;
   vertical-align: middle;
-  height: 4px;
+  height: 5px;
   width: 25px;
 }
 .lane {
@@ -23,19 +23,37 @@ body { margin:0; padding:0; }
   width: 25px;
 }
 .mixed {
-  background: green;
-  display: inline-block;
-  vertical-align: middle;
-  height: 2px;
-  width: 25px;
-}
-.color-line {
+  border-top: 2px dashed green;
   display: inline-block;
   vertical-align: middle;
   height: 3px;
   width: 25px;
 }
-.bg-blue { background: blue; }
-.bg-green { background: green; }
-.bg-orange { background: orange;}
-.bg-red { background: red;}
+.green-loop {
+  border-top: 3px dotted green;
+  display: inline-block;
+  vertical-align: middle;
+  height: 3px;
+  width: 25px;
+}
+.orange-loop {
+  border-top: 3px dotted orange;
+  display: inline-block;
+  vertical-align: middle;
+  height: 3px;
+  width: 25px;
+}
+.blue-loop {
+  border-top: 3px dotted blue;
+  display: inline-block;
+  vertical-align: middle;
+  height: 3px;
+  width: 25px;
+}
+.town-border {
+  background: lightgray;
+  display: inline-block;
+  vertical-align: middle;
+  height: 3px;
+  width: 25px;
+}

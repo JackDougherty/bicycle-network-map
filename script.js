@@ -52,21 +52,21 @@ var bikeNetworkStyle = function(f) {
     // 'shared': 'green'
   },
   type2weight = {
-    'path': 4,
+    'path': 5,
     'lane': 2,
     'mixed': 2,
-    'blue': 2,
+    'green': 2,
     'orange': 2,
-    'green': 2
+    'blue': 2
     // 'shared': 2
   },
   type2dash = {
     'path': 0,
     'lane': 0,
-    'mixed': 5,
-    'blue': 3,
+    'mixed': 4,
+    'green': 3,
     'orange': 3,
-    'green': 3
+    'blue': 3
     // 'shared': 3
   }
   return {
@@ -88,7 +88,6 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
       layer.bindPopup(feature.properties.name)
     }
   }).addTo(map);
-
   controlLayers.addOverlay(bikeNetworkLayerPath, '<i class="path"></i> Protected Path');
 
   bikeNetworkLayerLane = L.geoJson(data, {
@@ -100,7 +99,6 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
       layer.bindPopup(feature.properties.name)
     }
   }).addTo(map);
-
   controlLayers.addOverlay(bikeNetworkLayerLane, '<i class="lane"></i> Painted Lane');
 
   bikeNetworkLayerMixed = L.geoJson(data, {
@@ -112,32 +110,7 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
       layer.bindPopup(feature.properties.name)
     }
   }).addTo(map);
-
   controlLayers.addOverlay(bikeNetworkLayerMixed, '<i class="mixed"></i> Mixed Lane + Sharrow');
-
-  bikeNetworkLayerBlue = L.geoJson(data, {
-    style: bikeNetworkStyle,
-    filter: function( feature, layer) {
-      return feature.properties.type === 'blue' ;
-    },
-    onEachFeature: function( feature, layer) {
-      layer.bindPopup(feature.properties.name)
-    }
-  }).addTo(map);
-
-  controlLayers.addOverlay(bikeNetworkLayerBlue, '<i class="color-line bg-blue"></i> Blue loop');
-
-  bikeNetworkLayerOrange = L.geoJson(data, {
-    style: bikeNetworkStyle,
-    filter: function( feature, layer) {
-      return feature.properties.type === 'orange' ;
-    },
-    onEachFeature: function( feature, layer) {
-      layer.bindPopup(feature.properties.name)
-    }
-  }).addTo(map);
-
-  controlLayers.addOverlay(bikeNetworkLayerOrange, '<i class="color-line bg-orange"></i> Orange loop');
 
   bikeNetworkLayerGreen = L.geoJson(data, {
     style: bikeNetworkStyle,
@@ -148,15 +121,36 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
       layer.bindPopup(feature.properties.name)
     }
   }).addTo(map);
+  controlLayers.addOverlay(bikeNetworkLayerGreen, '<i class="green-loop"></i> Green loop (Hall HS)');
 
-  controlLayers.addOverlay(bikeNetworkLayerGreen, '<i class="color-line bg-green"></i> Green loop');
+  bikeNetworkLayerOrange = L.geoJson(data, {
+    style: bikeNetworkStyle,
+    filter: function( feature, layer) {
+      return feature.properties.type === 'orange' ;
+    },
+    onEachFeature: function( feature, layer) {
+      layer.bindPopup(feature.properties.name)
+    }
+  }).addTo(map);
+  controlLayers.addOverlay(bikeNetworkLayerOrange, '<i class="orange-loop"></i> Orange loop');
+
+  bikeNetworkLayerBlue = L.geoJson(data, {
+    style: bikeNetworkStyle,
+    filter: function( feature, layer) {
+      return feature.properties.type === 'blue' ;
+    },
+    onEachFeature: function( feature, layer) {
+      layer.bindPopup(feature.properties.name)
+    }
+  }).addTo(map);
+  controlLayers.addOverlay(bikeNetworkLayerBlue, '<i class="blue-loop"></i> Blue loop');
 
   // town outline layer, with custom pane set to display at lower z-index
   $.getJSON("towns.geojson", function (data){
     var geoJsonLayer = L.geoJson(data, {
       style: function (feature) {
         return {
-          'color': 'red',
+          'color': 'lightgray',
           'weight': 3,
           'fillColor': '#fff',
           'fillOpacity': 0
@@ -167,7 +161,7 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
       // },
       pane: 'towns'
     }).addTo(map);
-    controlLayers.addOverlay(geoJsonLayer, '<i class="color-line bg-red"></i> Town borders');
+    controlLayers.addOverlay(geoJsonLayer, '<i class="town-border"></i> Town borders');
   });
 
 });
