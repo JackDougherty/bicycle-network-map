@@ -13,11 +13,15 @@ var map = L.map('map', {
 //
 // var bikeNetworkLayer;
 
+// create custom pane for town layer, set to display below overlay zIndex 400
+map.createPane('towns');
+map.getPane('towns').style.zIndex = 350;
+
 // optional : customize link to view source code; add your own GitHub repository
 map.attributionControl
 .setPrefix('View <a href="http://github.com/bikewesthartford/bicycle-network-map">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
-L.control.scale().addTo(map);
+L.control.scale({position: "bottomright"}).addTo(map);
 
 // Reposition zoom control other than default topleft
 L.control.zoom({position: "topright"}).addTo(map);
@@ -37,12 +41,12 @@ var CartoDB_LightAll = new L.tileLayer('https://{s}.basemaps.cartocdn.com/light_
   subdomains: 'abcd',
   maxZoom: 19
 }).addTo(map); // add layer by default
-controlLayers.addBaseLayer(CartoDB_LightAll, 'Street Map light');
+// controlLayers.addBaseLayer(CartoDB_LightAll, 'Street Map light');
 
-var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
-});
-controlLayers.addBaseLayer(Esri_WorldStreetMap, 'Street Map colored');
+// var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+// 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+// });
+// controlLayers.addBaseLayer(Esri_WorldStreetMap, 'Street Map colored');
 
 // Style lines by color name https://www.w3schools.com/colors/colors_names.asp
 // by weight and dashArray https://leafletjs.com/reference.html#polyline
@@ -130,7 +134,7 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
     }
   }).addTo(map);
 
-  controlLayers.addOverlay(bikeNetworkLayerBlue, 'Blue loop');
+  controlLayers.addOverlay(bikeNetworkLayerBlue, '<i class="color-line bg-blue"></i> Blue loop');
 
   bikeNetworkLayerOrange = L.geoJson(data, {
     style: bikeNetworkStyle,
@@ -142,7 +146,7 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
     }
   }).addTo(map);
 
-  controlLayers.addOverlay(bikeNetworkLayerOrange, 'Orange loop');
+  controlLayers.addOverlay(bikeNetworkLayerOrange, '<i class="color-line bg-orange"></i> Orange loop');
 
   bikeNetworkLayerGreen = L.geoJson(data, {
     style: bikeNetworkStyle,
@@ -154,8 +158,9 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
     }
   }).addTo(map);
 
-  controlLayers.addOverlay(bikeNetworkLayerGreen, 'Green loop');
+  controlLayers.addOverlay(bikeNetworkLayerGreen, '<i class="color-line bg-green"></i> Green loop');
 
+  // town outline layer, with custom pane set to display at lower z-index
   $.getJSON("towns.geojson", function (data){
     var geoJsonLayer = L.geoJson(data, {
       style: function (feature) {
@@ -168,9 +173,10 @@ $.getJSON("bicycle-network-partial.geojson", function (data){
       },
       // onEachFeature: function( feature, layer) {
       //   layer.bindPopup(feature.properties.name) // change to match your geojson property labels
-      // }
-    });
-    controlLayers.addOverlay(geoJsonLayer, 'Towns');
+      // },
+      pane: 'towns'
+    }).addTo(map);
+    controlLayers.addOverlay(geoJsonLayer, '<i class="color-line bg-red"></i> Town borders');
   });
 
 });
