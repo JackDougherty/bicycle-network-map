@@ -1,38 +1,21 @@
 # bicycle-network-map
-Bicycle Network Map DRAFT for https://BikeWestHartford.org
+Bicycle Network Map by https://BikeWestHartford.org
 
 ## live map
-https://bikewesthartford.github.io/bicycle-network-map
+- https://bikewesthartford.github.io/bicycle-network-map
+or
+- https://bikewesthartford.org/maps
+
+## Data Compiled by Bike West Hartford, last updated June 2023
+- https://app.placemark.io/public/wCRAP2DACjNUsCdeS9AeP
+- see also download: bicycle-network.geojson
+- BWH design emphasizes protected paths, painted lanes, mixed (lane on one side, sharrow on other side), and popular routes. We do not emphasize "sharrows only" because these are inadequate bike infrastructure.
+
+## Data Sources
+- Town of West Hartford CT: GIS Mapping System, Bicycle Network, Existing Routes and Recreational Routes https://westhartfordct.mapgeo.io/datasets/properties
+- City of Hartford Bike Routes https://openhartford-hartfordgis.opendata.arcgis.com/datasets/bike-routes/explore?location=41.775340%2C-72.674067%2C13.00  
+- and City of Hartford Planning Viewer, Bike Routes https://gis1.hartford.gov/Html5Viewer/index.html?viewer=PlanningViewer
+IMPORTANT: Since Hartford marks bike lanes on both sides, removed one side to match West Hartford (for centerline distance). Also changed Hartford column headers and field names to match (Bike Lane to lane, etc.)
 
 ## TODO
-- Finalize Legend
-  - decide whether to distinguish between Multi-Use Trail (wide) versus Path (narrow)
-  - decide if or how to display other types (unpaved, proposed)
-  - show line colors/weights/dashArray in legend, similar to https://jackdougherty.github.io/bikemapcode/newbritain.html
-
-### Designated Infrastructure (as of DATE)
-  - path - Protected Paths - dark green line
-  - lane - Dedicated Bike Lane - medium green line
-  - shared - Shared with cars (Sharrows) - dotted light line
-  - mixed  - Mixed (Lane one side, Sharrow other) - dash med green
-  - proposed - Proposed (Trout Brook Trail only) - gray
-  - unpaved - Unpaved or Dirt Trails - gray (or light brown later?)
-
-- add to and from WH
-- add panes(?) to separate layers interactivity by levels
-- add toggle for town boundaries, off by default
-- add "GAP" in red for "Gaps" and credit Tony
-- update crash map data, run both West Hartford and Hartford, and display heatmap layer
-- convert Hartford names to proper capitalization
-- ground review Hartford
-- decide if best label is "manager" or "town" or use both
-- add Newington, New Britain, East Hartford, and more?
-- add DEEP Bicycling Trails? https://data.ct.gov/dataset/Bicycling-Permitted/my8k-w4e6
-- explore API for WH GIS mapping system below?
-
-## data
-- Public download https://app.placemark.io/public/wCRAP2DACjNUsCdeS9AeP
-- Town of West Hartford CT: GIS Mapping System, Bicycle Network, Existing Routes, as of November 2022, https://westhartfordct.mapgeo.io/datasets/properties
-  - correction: WH GIS reports sharrows on Mohawk Drive, from Mohegan to King Philip, but none visible in Dec 2022
-- Bicycle Network Map by Department of Community Development, Town of West Hartford (including MDC bike lanes located inside town border) map PDF last updated 25 May 2019, https://resources.finalsite.net/images/v1650896925/westhartfordctgov/lnsf6colmpygurg2j6xa/WHBicycleRoutes.pdf, Shapefiles provided in August 2022 by Information Technology Director, Town of West Hartford and AppGeo, based on 2019 GIS map, https://appgeo.sharefile.com/share/view/s4cec5dd8d9b54591856f6e6f178504c6
-- City of Hartford Bike Routes downloaded Aug 2022 https://openhartford-hartfordgis.opendata.arcgis.com/datasets/bike-routes/explore?location=41.775340%2C-72.674067%2C13.00  IMPORTANT: Since Hartford marks bike lanes on both sides, removed one side to match West Hartford (for centerline distance). Also changed Hartford column headers and field names to match (Bike Lane to lane, etc.)
+https://data.ct.gov/dataset/Bicycling-Permitted/my8k-w4e6
