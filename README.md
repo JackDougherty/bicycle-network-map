@@ -17,5 +17,7 @@ or
 - and City of Hartford Planning Viewer, Bike Routes https://gis1.hartford.gov/Html5Viewer/index.html?viewer=PlanningViewer
 IMPORTANT: Since Hartford marks bike lanes on both sides, removed one side to match West Hartford (for centerline distance). Also changed Hartford column headers and field names to match (Bike Lane to lane, etc.)
 
+- Bike Shops https://app.placemark.io/map/J5KA0ReXOamxWmyxNxGcc
+
 ## TODO
 https://data.ct.gov/dataset/Bicycling-Permitted/my8k-w4e6
