@@ -12,7 +12,7 @@ map.getPane('towns').style.zIndex = 350;
 
 // optional : customize link to view source code; add your own GitHub repository
 map.attributionControl
-.setPrefix('View <a href="https://github.com/bikewesthartford/bicycle-network-map">June 2023 data from BikeWestHartford</a>, created with <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+.setPrefix('View <a href="https://github.com/bikewesthartford/bicycle-network-map">Dec 2023 data from BikeWestHartford</a>, created with <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
 L.control.scale({position: "bottomright"}).addTo(map);
 
@@ -128,7 +128,7 @@ $.getJSON("bicycle-network.geojson", function (data){
     var geoJsonLayer = L.geoJson(data, {
       pointToLayer: function( feature, latlng) {
         var marker = L.marker(latlng,{icon: iconStyle});
-        marker.bindPopup(feature.properties.name); 
+        marker.bindPopup(feature.properties.name);
         return marker;
       }
     }).addTo(map);
