@@ -28,7 +28,7 @@ We track but do not display "shared" routes marked only by sharrows, since these
 
 TODO - change show popup from click to hover
 
-## Data last updated July 2024
+## Data last updated November 2024
 - see `bicycle-network.geojson` file
 - edited with free browser tool https://geojson.io or https://Placemark.io
 - data columns

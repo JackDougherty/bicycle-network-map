@@ -12,7 +12,7 @@ map.getPane('towns').style.zIndex = 350;
 
 // optional : customize link to view source code; add your own GitHub repository
 map.attributionControl
-.setPrefix('View <a href="https://github.com/bikewesthartford/bicycle-network-map">Jan 2024 data from BikeWestHartford</a>, created with <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+.setPrefix('View <a href="https://github.com/bikewesthartford/bicycle-network-map">Nov 2024 data from BikeWestHartford</a>, created with <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
 L.control.scale({position: "bottomright"}).addTo(map);
 
